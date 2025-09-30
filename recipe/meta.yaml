@@ -15,8 +15,7 @@ build:
 
 requirements:
   build:
-    - python  # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - python
     - {{ compiler('c') }}
   host:
     - python
@@ -27,12 +26,16 @@ requirements:
     - python
 
 test:
+  source_files:
+    - tests
   imports:
     - ciso8601
   requires:
     - pip
+    - pytest
   commands:
     - pip check
+    - pytest -v tests
 
 about:
   home: https://github.com/closeio/ciso8601
